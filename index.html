@@ -1,7 +1,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     var chatContainer = document.createElement("div");
-    chatContainer.style.cssText = "position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: sans-serif;";
+    chatContainer.style.cssText = "position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: sans-serif; overflow: visible;";
     chatContainer.innerHTML = `
       <div id="chat-bubble" style="width: 60px; height: 60px; background: #2e7d32; color: #fff; border-radius: 50%; text-align: center; line-height: 60px; cursor: pointer; font-size: 24px; transition: transform 0.3s;">💬</div>
 
@@ -22,12 +22,12 @@
         </div>
       </div>
 
-      <div id="ai-chat-window" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 400px; height: 520px; background: #ffffff; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.3); overflow: hidden; z-index: 9999;">
-        <div style="position: relative; width: 100%; height: 100%;">
-          <img src="buddy.PNG" alt="Buddy" style="position: absolute; top: 10px; left: -50px; width: 150px; z-index: 10000; pointer-events: none;">
-          <div style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 20px; color: #000; z-index: 10001;" id="close-chat">✖</div>
-          <iframe src="https://marbellacannabisclub.github.io/mcc-chatbot/?initialMessage=Hey%20bud!%20Can%20I%20help%20you%20with%20anything?&showHowToJoin=true" width="100%" height="100%" style="border: none;"></iframe>
+      <div id="ai-chat-window" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 320px; height: 420px; background: #ffffff; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.3); overflow: visible;">
+        <div style="position: absolute; top: -60px; left: -45px; width: 150px; z-index: 10000;">
+          <img src="buddy.PNG" alt="Buddy" style="width: 100%;">
         </div>
+        <iframe src="https://67fb80a6c1c251b0273d0ec7--splendorous-khapse-1eb83d.netlify.app/?welcome=Hey%20bud!%20Can%20I%20help%20you%20with%20anything?&buttons=How%20to%20join" width="100%" height="100%" style="border: none;"></iframe>
+        <div id="close-chat" style="position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; background: black; color: white; text-align: center; line-height: 20px; border-radius: 50%; cursor: pointer; font-size: 14px; z-index: 10001;">×</div>
       </div>
     `;
 
@@ -36,6 +36,7 @@
     var bubble = document.getElementById("chat-bubble");
     var aiLauncher = null;
     var aiWindow = null;
+    var closeBtn = null;
 
     bubble.onmouseover = function() {
       this.style.transform = "scale(1.1)";
@@ -57,7 +58,8 @@
     setTimeout(() => {
       aiLauncher = document.getElementById("ai-chat-launch");
       aiWindow = document.getElementById("ai-chat-window");
-      const closeBtn = document.getElementById("close-chat");
+      closeBtn = document.getElementById("close-chat");
+
       if (aiLauncher) {
         aiLauncher.addEventListener("click", function() {
           aiWindow.style.display = aiWindow.style.display === "none" ? "block" : "none";
