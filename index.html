@@ -1,5 +1,5 @@
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     var chatContainer = document.createElement("div");
     chatContainer.style.cssText = "position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: sans-serif; overflow: visible;";
     chatContainer.innerHTML = `
@@ -23,11 +23,9 @@
       </div>
 
       <div id="ai-chat-window" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 320px; height: 420px; background: #ffffff; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.3); overflow: visible;">
-        <div style="position: absolute; top: -60px; left: -45px; width: 150px; z-index: 10000;">
-          <img src="buddy.PNG" alt="Buddy" style="width: 100%;">
-        </div>
-        <iframe src="https://67fb80a6c1c251b0273d0ec7--splendorous-khapse-1eb83d.netlify.app/?welcome=Hey%20bud!%20Can%20I%20help%20you%20with%20anything?&buttons=How%20to%20join" width="100%" height="100%" style="border: none;"></iframe>
+        <img src="buddy.PNG" alt="Buddy" style="position: absolute; top: -60px; left: -45px; width: 150px; z-index: 10000;">
         <div id="close-chat" style="position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; background: black; color: white; text-align: center; line-height: 20px; border-radius: 50%; cursor: pointer; font-size: 14px; z-index: 10001;">×</div>
+        <iframe src="https://marbellacannabisclub.github.io/mcc-chatbot/" width="100%" height="100%" style="border: none;"></iframe>
       </div>
     `;
 
@@ -36,20 +34,19 @@
     var bubble = document.getElementById("chat-bubble");
     var aiLauncher = null;
     var aiWindow = null;
-    var closeBtn = null;
 
-    bubble.onmouseover = function() {
+    bubble.onmouseover = function () {
       this.style.transform = "scale(1.1)";
     };
-    bubble.onmouseout = function() {
+    bubble.onmouseout = function () {
       this.style.transform = "scale(1)";
     };
-    bubble.onclick = function() {
+    bubble.onclick = function () {
       var options = document.getElementById("chat-options");
       options.style.display = options.style.display === "none" ? "block" : "none";
     };
 
-    document.addEventListener("click", function(event) {
+    document.addEventListener("click", function (event) {
       if (!chatContainer.contains(event.target)) {
         document.getElementById("chat-options").style.display = "none";
       }
@@ -58,15 +55,16 @@
     setTimeout(() => {
       aiLauncher = document.getElementById("ai-chat-launch");
       aiWindow = document.getElementById("ai-chat-window");
-      closeBtn = document.getElementById("close-chat");
+      const closeBtn = document.getElementById("close-chat");
 
       if (aiLauncher) {
-        aiLauncher.addEventListener("click", function() {
+        aiLauncher.addEventListener("click", function () {
           aiWindow.style.display = aiWindow.style.display === "none" ? "block" : "none";
         });
       }
+
       if (closeBtn) {
-        closeBtn.addEventListener("click", function() {
+        closeBtn.addEventListener("click", function () {
           aiWindow.style.display = "none";
         });
       }
